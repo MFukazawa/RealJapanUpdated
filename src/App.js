@@ -2,7 +2,7 @@
 
 function App() {
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center mt-10'>
       <h1 className='text-5xl my-6'>Real Japan</h1>
 
       <main className='w-screen text-center'>
