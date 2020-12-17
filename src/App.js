@@ -1,6 +1,13 @@
+import React, { useEffect } from 'react'
 // import { app } from './styles/app.module.css'
 
 function App() {
+  useEffect(() => {
+    fetch('http://localhost:9027')
+      .then(res => res.json())
+      .then(console.log)
+  })
+
   return (
     <div className='flex flex-col justify-center items-center mt-10'>
       <h1 className='text-5xl my-6'>Real Japan</h1>
