@@ -1,7 +1,5 @@
 .Login .loginHero {
   position: relative;
-  width: 100vw;
-  height: 100vh;
 }
 
 .Login .loginHero::after {
