@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Home from './components/Home'
-import Report from './components/Report'
+import Home from './pages/Home'
+import Report from './pages/Report'
+import Login from './pages/Login'
 import { BrowserRouter as Switch, Route, Link } from 'react-router-dom'
-// import { app } from './styles/app.module.css'
 
 function App() {
   useEffect(() => {
@@ -14,6 +14,7 @@ function App() {
   return (
     <Switch>
       <Route path="/report" component={Report} />
+      <Route path="/login" component={Login} />
       <Route exact path="/" component={Home} />
     </Switch>
     // <h1>home page</h1>

@@ -3,8 +3,13 @@ import { BrowserRouter as Switch, Route, Link } from 'react-router-dom'
 
 export default function Home() {
   return (
-    <div className='flex flex-col justify-center items-center mt-10'>
-      <h1 className='text-5xl my-6'>Real Japan</h1>
+    <>
+      <nav className="flex justify-end m-5">
+        <Link to="/login" className="hover:text-blue-500">Login</Link>
+      </nav>
+
+      <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-5xl mt-10 mb-6'>Real Japan</h1>
 
       <main className='w-screen text-center'>
         <div className='p-4'>Enter your total price and area (m²)</div>
@@ -67,6 +72,7 @@ export default function Home() {
         </button>
       </main>
       <Link to="/report">To Report</Link>
-    </div>
+      </div>
+    </>
   );
 }
