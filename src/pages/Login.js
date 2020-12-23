@@ -1,5 +1,5 @@
 import React, { useState }from 'react';
-import { BrowserRouter as Switch, Route, Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import classes from '../styles/login.module.css';
 
 const Login = (props) => {
@@ -8,10 +8,15 @@ const Login = (props) => {
   //   .then((res) => res.json())
   //   .then(console.log);
   // });
+  let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
+
   const handleSubmit = () => {
-    console.log(email, password)
+    fetch('http://localhost:9027')
+      .then((res) => res.json())
+      .then(console.log)
+    history.push('/')
   }
 
   return (
