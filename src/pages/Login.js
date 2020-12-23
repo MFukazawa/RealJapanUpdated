@@ -60,7 +60,29 @@ const Login = ({ location }) => {
         console.log(e);
       }
     } else {
-      console.log('this is signup');
+      if (email.length > 5 && password.length > 3) {
+        try {
+          fetch('http://localhost:9027/register', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              // if (data === 'success') {
+              //   history.push('/');
+              // }
+            });
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        alert('Email or password is too short');
+      }
     }
   };
 
@@ -102,7 +124,7 @@ const Login = ({ location }) => {
             <input
               className='border border-black bg-transparent cursor-pointer hover:opacity-50 rounded mt-6 px-5 py-2'
               type='submit'
-              value='Login'
+              value={ !isSignup ? 'Login' : 'Sign Up'}
             />
 
             { !isSignup
