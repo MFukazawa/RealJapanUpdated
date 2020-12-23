@@ -7,7 +7,7 @@ const Login = ({ location }) => {
   let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(null);
+  const [isSignup, setIsSignup] = useState(false);
 
   // prevent ESLint location proptype error
   Login.propTypes = {
@@ -16,33 +16,51 @@ const Login = ({ location }) => {
     }).isRequired,
   };
 
+  // set variable (isSignup?) ✔️
+  // if signup button is clicked, make it true ✔️
+  // change title, + inputs if necessary to signup ✔️
+  // if login clicked, or page reset, revert variable ✔️
+  // if variable is true, change fetch endpoint ✔️
+
   useEffect(() => {
-    if (location.pathname === "/login") {
-      setIsLogin(true)
-    }
-    console.log(isLogin)
+    // if this is Login
+    // if (location.pathname === "/login") {
+    //   setIsLogin(true)
+    // }
+    // console.log(isSignup)
   })
+
+  const handleChangeToSignup = () => {
+    setIsSignup(true);
+  };
+
+  const handleChangeToLogin = () => {
+    setIsSignup(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      fetch('http://localhost:9027/login', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data === 'success') {
-            history.push('/');
-          }
-        });
-    } catch (e) {
-      console.log(e);
+    if (!isSignup) {
+      try {
+        fetch('http://localhost:9027/login', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data === 'success') {
+              history.push('/');
+            }
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log('this is signup');
     }
   };
 
@@ -60,7 +78,13 @@ const Login = ({ location }) => {
             onSubmit={handleSubmit}
             className='flex flex-col justify-center items-center w-1/2 py-10 bg-white bg-opacity-70 shadow-2xl border border-white rounded-3xl'
           >
-            <h1 className='text-5xl pt-6 tracking-widest'>Login</h1>
+            <h1 className='text-5xl pt-6 tracking-widest'>
+              {
+                !isSignup
+                ? "Login"
+                : "Sign Up"
+              }
+            </h1>
             <label className='mt-6'>Email</label>
             <input
               value={email}
@@ -81,7 +105,10 @@ const Login = ({ location }) => {
               value='Login'
             />
 
-            <Link to="/signup" className="mt-5 text-green-500">Don&apos;t have an account? Signup here.</Link>
+            { !isSignup
+              ? <div onClick={handleChangeToSignup} className="mt-5 text-green-500 cursor-pointer">Don&apos;t have an account? Signup here.</div>
+              : <div onClick={handleChangeToLogin} className="mt-5 text-green-500 cursor-pointer">Return to login</div>
+            }
           </form>
         </div>
       </div>
