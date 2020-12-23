@@ -3,11 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import classes from '../styles/login.module.css';
 
 const Login = (props) => {
-  // useEffect(() => {
-  // fetch('http://localhost:9027')
-  //   .then((res) => res.json())
-  //   .then(console.log);
-  // });
   let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -69,6 +64,8 @@ const Login = (props) => {
               type='submit'
               value='Login'
             />
+
+            <Link to="/signup" className="mt-5 text-green-500">Don&apos;t have an account? Signup here.</Link>
           </form>
         </div>
       </div>
