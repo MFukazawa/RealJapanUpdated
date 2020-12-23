@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Home from './pages/Home'
 import Report from './pages/Report'
 import Login from './pages/Login'
 import { BrowserRouter as Switch, Route, Link } from 'react-router-dom'
 
 function App() {
-  useEffect(() => {
-    fetch('http://localhost:9027')
-      .then((res) => res.json())
-      .then(console.log);
-  });
-
   return (
     <Switch>
       <Route path="/report" component={Report} />
