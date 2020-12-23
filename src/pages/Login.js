@@ -1,34 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types'
 import { Link, useHistory } from 'react-router-dom';
 import classes from '../styles/login.module.css';
 
-const Login = ({ location }) => {
+const Login = (props) => {
   let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignup, setIsSignup] = useState(false);
+  const [userData, setUserData] = useState({});
 
   // prevent ESLint location proptype error
-  Login.propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
-  // set variable (isSignup?) ✔️
-  // if signup button is clicked, make it true ✔️
-  // change title, + inputs if necessary to signup ✔️
-  // if login clicked, or page reset, revert variable ✔️
-  // if variable is true, change fetch endpoint ✔️
+  // Login.propTypes = {
+  //   location: PropTypes.shape({
+  //     pathname: PropTypes.string.isRequired,
+  //   }).isRequired,
+  // };
 
   useEffect(() => {
-    // if this is Login
-    // if (location.pathname === "/login") {
-    //   setIsLogin(true)
-    // }
     // console.log(isSignup)
-  })
+  }, [])
 
   const handleChangeToSignup = () => {
     setIsSignup(true);
@@ -37,6 +27,10 @@ const Login = ({ location }) => {
   const handleChangeToLogin = () => {
     setIsSignup(false);
   };
+
+  // const createUser = (user) => {
+  //   setUserData(user)
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +50,7 @@ const Login = ({ location }) => {
               history.push('/');
             }
           });
-      } catch (e) {
+      } catch(e) {
         console.log(e);
       }
     } else {
@@ -71,11 +65,13 @@ const Login = ({ location }) => {
             }),
           })
             .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              // if (data === 'success') {
-              //   history.push('/');
-              // }
+            .then((user) => {
+              if (user) {
+                console.log(user);
+                setUserData(user);
+                console.log(userData);
+                history.push('/');
+              }
             });
         } catch (e) {
           console.log(e);
