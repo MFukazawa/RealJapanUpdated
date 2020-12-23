@@ -1,33 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import classes from '../styles/login.module.css';
 
-const Login = ({ location }) => {
+
+const Signup = () => {
   let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(null);
-
-  // prevent ESLint location proptype error
-  Login.propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
-  useEffect(() => {
-    if (location.pathname === "/login") {
-      setIsLogin(true)
-    }
-    console.log(isLogin)
-  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     try {
-      fetch('http://localhost:9027/login', {
+      fetch('http://localhost:9027/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -46,6 +31,7 @@ const Login = ({ location }) => {
     }
   };
 
+
   return (
     <div className={classes.Login}>
       <div className={classes.loginHero}>
@@ -60,7 +46,7 @@ const Login = ({ location }) => {
             onSubmit={handleSubmit}
             className='flex flex-col justify-center items-center w-1/2 py-10 bg-white bg-opacity-70 shadow-2xl border border-white rounded-3xl'
           >
-            <h1 className='text-5xl pt-6 tracking-widest'>Login</h1>
+            <h1 className='text-5xl pt-6 tracking-widest'>Sign Up</h1>
             <label className='mt-6'>Email</label>
             <input
               value={email}
@@ -89,4 +75,4 @@ const Login = ({ location }) => {
   );
 };
 
-export default Login;
+export default Signup
