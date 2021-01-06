@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-const Home = () => {
+const Home = ({ email }) => {
   return (
     <>
       <nav className="flex justify-end m-5">
@@ -12,6 +13,7 @@ const Home = () => {
       <h1 className='text-5xl mt-10 mb-6'>Real Japan</h1>
 
       <main className='w-screen text-center'>
+        <h1>{ email }</h1>
         <div className='p-4'>Enter your total price and area (m²)</div>
         <label htmlFor='price' />
         <input
@@ -75,6 +77,10 @@ const Home = () => {
       </div>
     </>
   );
+}
+
+Home.propTypes = {
+  email: PropTypes.string
 }
 
 export default Home;

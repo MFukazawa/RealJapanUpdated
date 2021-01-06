@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import classes from '../styles/login.module.css';
+import PropTypes from 'prop-types'
 
 const Login = (props) => {
   let history = useHistory();
@@ -45,11 +46,17 @@ const Login = (props) => {
           }),
         })
           .then((res) => res.json())
-          .then((data) => {
-            if (data === 'success') {
-              history.push('/');
-            }
-          });
+          .then(user => {
+            // TODO server is returning success instead of user data, which we need here -- fix server response
+            console.log(user)
+          })
+          // .then((data) => {
+          //   if (data === 'success') {
+          //     props.loadUser(data);
+          //     console.log(data);
+          //     history.push('/');
+          //   }
+          // });
       } catch(e) {
         console.log(e);
       }
@@ -67,7 +74,6 @@ const Login = (props) => {
             .then((res) => res.json())
             .then((user) => {
               if (user) {
-                console.log(user);
                 setUserData(user);
                 console.log(userData);
                 history.push('/');
@@ -133,5 +139,9 @@ const Login = (props) => {
     </div>
   );
 };
+
+Login.propTypes = {
+  loadUser: PropTypes.any
+}
 
 export default Login;
