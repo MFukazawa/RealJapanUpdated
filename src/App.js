@@ -28,6 +28,24 @@ class App extends React.Component {
     this.setState(prevState => ({
       isSignedIn: !prevState.isSignedIn
     }))
+
+    // if (this.state.isSignedIn === true) {
+    //   this.setState({
+    //     user: {
+    //       id: '',
+    //       email: '',
+    //       joined: ''
+    //     }
+    //   })
+    // }
+  }
+
+  resetUser = () => {
+    this.setState({ user: {
+      id: '',
+      email: '',
+      joined: ''
+    }})
   }
 
 
@@ -46,6 +64,7 @@ class App extends React.Component {
             updateSignInStatus={this.updateSignInStatus}
             isSignedIn={this.state.isSignedIn}
             email={this.state.user.email}
+            resetUser={this.resetUser}
           />
         </Route>
       </Switch>

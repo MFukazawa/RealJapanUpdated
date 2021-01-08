@@ -2,14 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const Home = ({ email, isSignedIn, updateSignInStatus }) => {
+const Home = ({ email, isSignedIn, updateSignInStatus, resetUser }) => {
   return (
     <>
       <nav className="flex justify-end m-5">
         { !isSignedIn ?
         <Link to="/login" className="hover:text-blue-500">Login</Link>
         :
-        <button onClick={(e) => updateSignInStatus(e, false)}>Logout</button>
+        <div>
+          <span className="mr-4">{ email }</span>
+          <button onClick={(e) => { updateSignInStatus(e, false); resetUser()}}>Logout</button>
+        </div>
       }
       </nav>
 
@@ -17,9 +20,6 @@ const Home = ({ email, isSignedIn, updateSignInStatus }) => {
       <h1 className='text-5xl mt-10 mb-6'>Real Japan</h1>
 
       <main className='w-screen text-center'>
-        <h1>{ email }</h1>
-        <h1>{ isSignedIn }</h1>
-
         <div className='p-4'>Enter your total price and area (m²)</div>
         <label htmlFor='price' />
         <input
@@ -88,7 +88,8 @@ const Home = ({ email, isSignedIn, updateSignInStatus }) => {
 Home.propTypes = {
   email: PropTypes.string,
   isSignedIn: PropTypes.bool,
-  updateSignInStatus: PropTypes.func
+  updateSignInStatus: PropTypes.func,
+  resetUser: PropTypes.func
 }
 
 export default Home;

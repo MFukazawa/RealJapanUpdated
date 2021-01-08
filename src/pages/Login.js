@@ -47,8 +47,6 @@ const Login = (props) => {
         })
           .then((res) => res.json())
           .then(user => {
-            // TODO server is returning success instead of user data, which we need here -- fix server response
-            console.log(user)
             props.loadUser(user)
             props.updateSignInStatus(true)
             history.push('/')
@@ -78,7 +76,6 @@ const Login = (props) => {
             .then((user) => {
               if (user) {
                 props.loadUser(user);
-                console.log(user);
                 props.updateSignInStatus(true)
                 history.push('/');
               }
@@ -145,7 +142,8 @@ const Login = (props) => {
 };
 
 Login.propTypes = {
-  loadUser: PropTypes.any
+  loadUser: PropTypes.func,
+  updateSignInStatus: PropTypes.func
 }
 
 export default Login;
