@@ -24,6 +24,12 @@ class App extends React.Component {
     }})
   }
 
+  updateSignInStatus = () => {
+    this.setState(prevState => ({
+      isSignedIn: !prevState.isSignedIn
+    }))
+  }
+
 
   render() {
     return (
@@ -33,10 +39,12 @@ class App extends React.Component {
         </Route>
         <Route path='/login'>
           {/* add props to login route if i want to keep state in the App */}
-          <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+          <Login loadUser={this.loadUser} updateSignInStatus={this.updateSignInStatus} onRouteChange={this.onRouteChange} />
         </Route>
         <Route exact path='/'>
           <Home
+            updateSignInStatus={this.updateSignInStatus}
+            isSignedIn={this.state.isSignedIn}
             email={this.state.user.email}
           />
         </Route>

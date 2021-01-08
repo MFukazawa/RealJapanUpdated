@@ -8,7 +8,7 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignup, setIsSignup] = useState(false);
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
 
   // prevent ESLint location proptype error
   // Login.propTypes = {
@@ -50,6 +50,8 @@ const Login = (props) => {
             // TODO server is returning success instead of user data, which we need here -- fix server response
             console.log(user)
             props.loadUser(user)
+            props.updateSignInStatus(true)
+            history.push('/')
           })
           // .then((data) => {
           //   if (data === 'success') {
@@ -75,8 +77,9 @@ const Login = (props) => {
             .then((res) => res.json())
             .then((user) => {
               if (user) {
-                setUserData(user);
-                console.log(userData);
+                props.loadUser(user);
+                console.log(user);
+                props.updateSignInStatus(true)
                 history.push('/');
               }
             });
