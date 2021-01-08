@@ -49,6 +49,7 @@ const Login = (props) => {
           .then(user => {
             // TODO server is returning success instead of user data, which we need here -- fix server response
             console.log(user)
+            props.loadUser(user)
           })
           // .then((data) => {
           //   if (data === 'success') {
