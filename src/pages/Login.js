@@ -48,7 +48,7 @@ const Login = (props) => {
           .then((res) => res.json())
           .then(user => {
             props.loadUser(user)
-            props.updateSignInStatus(true)
+            // props.updateSignInStatus(true)
             history.push('/')
           })
           // .then((data) => {
@@ -76,7 +76,7 @@ const Login = (props) => {
             .then((user) => {
               if (user) {
                 props.loadUser(user);
-                props.updateSignInStatus(true)
+                // props.updateSignInStatus(true)
                 history.push('/');
               }
             });

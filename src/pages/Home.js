@@ -1,17 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+// import { useFetch } from '../utils/hooks.js'
 
-const Home = ({ email, isSignedIn, updateSignInStatus, resetUser }) => {
+// const [prefData, loading] = useFetch("../assets/prefectures.json")
+
+const Home = ({ email, resetUser }) => {
   return (
     <>
       <nav className="flex justify-end m-5">
-        { !isSignedIn ?
+        { email.length === 0 ?
         <Link to="/login" className="hover:text-blue-500">Login</Link>
         :
         <div>
           <span className="mr-4">{ email }</span>
-          <button onClick={(e) => { updateSignInStatus(e, false); resetUser()}}>Logout</button>
+          <button onClick={(e) => resetUser(e)}>Logout</button>
+          {/* <button onClick={(e) => { updateSignInStatus(e, false); resetUser()}}>Logout</button> */}
         </div>
       }
       </nav>
@@ -43,12 +47,14 @@ const Home = ({ email, isSignedIn, updateSignInStatus, resetUser }) => {
 
           <div className='flex flex-wrap justify-center items-center'>
             <label htmlFor='prefecture' />
-            <input
+            <select
               type='text'
               name='prefecture'
               id='prefecture'
               className='border border-black rounded m-4 p-2'
-            />
+            >
+              <option>hi</option>
+            </select>
 
             <label htmlFor='city' />
             <input

@@ -7,7 +7,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      isSignedIn: false,
+      // remove isSignedIn - replace with user.email.length > 0
+      // isSignedIn: false,
       user: {
         id: '',
         email: '',
@@ -24,23 +25,14 @@ class App extends React.Component {
     }})
   }
 
-  updateSignInStatus = () => {
-    this.setState(prevState => ({
-      isSignedIn: !prevState.isSignedIn
-    }))
-
-    // if (this.state.isSignedIn === true) {
-    //   this.setState({
-    //     user: {
-    //       id: '',
-    //       email: '',
-    //       joined: ''
-    //     }
-    //   })
-    // }
-  }
+  // updateSignInStatus = () => {
+  //   this.setState(prevState => ({
+  //     isSignedIn: !prevState.isSignedIn
+  //   }))
+  // }
 
   resetUser = () => {
+    console.log('this is reset user');
     this.setState({ user: {
       id: '',
       email: '',
@@ -57,12 +49,12 @@ class App extends React.Component {
         </Route>
         <Route path='/login'>
           {/* add props to login route if i want to keep state in the App */}
-          <Login loadUser={this.loadUser} updateSignInStatus={this.updateSignInStatus} onRouteChange={this.onRouteChange} />
+          {/* <Login loadUser={this.loadUser} updateSignInStatus={this.updateSignInStatus} onRouteChange={this.onRouteChange} /> */}
+          <Login loadUser={this.loadUser} email={this.state.user.email} onRouteChange={this.onRouteChange} />
         </Route>
         <Route exact path='/'>
           <Home
-            updateSignInStatus={this.updateSignInStatus}
-            isSignedIn={this.state.isSignedIn}
+            // isSignedIn={this.state.isSignedIn}
             email={this.state.user.email}
             resetUser={this.resetUser}
           />
