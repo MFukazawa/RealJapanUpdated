@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './pages/Home';
 import Report from './pages/Report';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 class App extends React.Component {
   constructor() {
@@ -51,6 +52,9 @@ class App extends React.Component {
           {/* add props to login route if i want to keep state in the App */}
           {/* <Login loadUser={this.loadUser} updateSignInStatus={this.updateSignInStatus} onRouteChange={this.onRouteChange} /> */}
           <Login loadUser={this.loadUser} email={this.state.user.email} onRouteChange={this.onRouteChange} />
+        </Route>
+        <Route path='/register'>
+          <Register loadUser={this.loadUser} email={this.state.user.email} onRouteChange={this.onRouteChange} />
         </Route>
         <Route exact path='/'>
           <Home

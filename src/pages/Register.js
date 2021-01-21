@@ -3,31 +3,35 @@ import { Link, useHistory } from 'react-router-dom';
 import classes from '../styles/login.module.css';
 import PropTypes from 'prop-types'
 
-// TODO separate login and register
-
-const Login = (props) => {
+const Register = (props) => {
   let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      fetch('http://localhost:9027/login', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      })
-        .then((res) => res.json())
-        .then(user => {
-          props.loadUser(user)
-          history.push('/')
+    if (email.length > 5 && password.length > 3) {
+      try {
+        fetch('http://localhost:9027/register', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
         })
-    } catch(e) {
-      console.log(e);
+          .then((res) => res.json())
+          .then((user) => {
+            if (user) {
+              props.loadUser(user);
+              history.push('/');
+            }
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      alert('Email or password is too short');
     }
   };
 
@@ -46,7 +50,7 @@ const Login = (props) => {
             className='flex flex-col justify-center items-center w-1/2 py-10 bg-white bg-opacity-70 shadow-2xl border border-white rounded-3xl'
           >
             <h1 className='text-5xl pt-6 tracking-widest'>
-              Login
+                Sign Up
             </h1>
             <label className='mt-6'>Email</label>
             <input
@@ -65,10 +69,10 @@ const Login = (props) => {
             <input
               className='border border-black bg-transparent cursor-pointer hover:opacity-50 rounded mt-6 px-5 py-2'
               type='submit'
-              value="Login"
+              value='Sign Up'
             />
 
-            <Link to="/register" className="mt-5 text-green-500 cursor-pointer">Don&apos;t have an account? Signup here.</Link>
+            <Link to="/login" className="mt-5 text-green-500 cursor-pointer">Go to Login</Link>
           </form>
         </div>
       </div>
@@ -76,9 +80,9 @@ const Login = (props) => {
   );
 };
 
-Login.propTypes = {
+Register.propTypes = {
   loadUser: PropTypes.func,
   updateSignInStatus: PropTypes.func
 }
 
-export default Login;
+export default Register;

@@ -10,7 +10,12 @@ const Home = ({ email, resetUser }) => {
     <>
       <nav className="flex justify-end m-5">
         { email.length === 0 ?
-        <Link to="/login" className="hover:text-blue-500">Login</Link>
+
+        <div>
+          <Link to="/login" className="mr-4 hover:text-blue-500">Login</Link>
+          <Link to="/register" className="hover:text-blue-500">Register</Link>
+        </div>
+
         :
         <div>
           <span className="mr-4">{ email }</span>
