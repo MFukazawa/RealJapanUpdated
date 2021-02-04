@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-// import { useFetch } from '../utils/hooks.js'
-
-// const [prefData, loading] = useFetch("../assets/prefectures.json")
+import { useFetch } from '../utils/hooks.js'
 
 const Home = ({ email, resetUser }) => {
+  const [state, setState] = useState({
+    totalPrice: "",
+    area: "",
+    code: "45",
+    city: "",
+    neighborhood: "",
+    propertyType: ""
+  });
+
+  const [prefData, loading] = useFetch("../prefectures.json");
+
+  function handleChange(event) {
+    const value = event.target.value;
+    setState({
+      ...state,
+      [event.target.name]: value
+    });
+  }
+
   return (
     <>
       <nav className="flex justify-end m-5">
@@ -52,14 +69,30 @@ const Home = ({ email, resetUser }) => {
 
           <div className='flex flex-wrap justify-center items-center'>
             <label htmlFor='prefecture' />
-            <select
+            {loading ? (
+          "Loading..."
+        ) : (
+          <select
+            name="code"
+            id="Code"
+            value={state.code}
+            onChange={handleChange}
+          >
+            {prefData.data.map(({ code, name }) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))}
+          </select>
+        )}
+            {/* <select
               type='text'
               name='prefecture'
               id='prefecture'
               className='border border-black rounded m-4 p-2'
             >
-              <option>hi</option>
-            </select>
+   
+            </select> */}
 
             <label htmlFor='city' />
             <input
