@@ -5,12 +5,12 @@ import { useFetch } from '../utils/hooks.js';
 
 const Home = ({ email, resetUser }) => {
   const [state, setState] = useState({
-    totalPrice: '',
+    price: '',
     area: '',
     code: '45',
     city: '',
     neighborhood: '',
-    propertyType: '',
+    propertyType: 'Residential Land',
   });
 
   const [prefData, loading] = useFetch('../prefectures.json');
@@ -57,14 +57,18 @@ const Home = ({ email, resetUser }) => {
 
         <main className='w-screen text-center'>
           <div className='p-4'>Enter your total price and area (m²)</div>
-          <label htmlFor='price' />
+
+          <label htmlFor='Total Price' />
           <input
             type='text'
             name='price'
             id='price'
             placeholder='Total Price'
             className='border border-black rounded mx-4 p-2'
+            value={state.price}
+            onChange={handleChange}
           />
+
           <label htmlFor='area' />
           <input
             type='text'
@@ -72,6 +76,8 @@ const Home = ({ email, resetUser }) => {
             id='area'
             placeholder='Area in m²'
             className='border border-black rounded mx-4 p-2'
+            value={state.area}
+            onChange={handleChange}
           />
 
           <div className='w-screen'>
@@ -118,9 +124,12 @@ const Home = ({ email, resetUser }) => {
               <label htmlFor='property-type' />
               <select
                 type='text'
-                name='property-type'
+                name='propertyType'
                 id='property-type'
                 className='border border-black rounded m-4 p-2'
+                value={state.propertyType}
+                onChange={handleChange}
+
               >
                 {landTypes.map((e) => (
                   <option key={e} value={e}>
