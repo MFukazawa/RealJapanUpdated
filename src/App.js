@@ -8,8 +8,6 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      // remove isSignedIn - replace with user.email.length > 0
-      // isSignedIn: false,
       user: {
         id: '',
         email: '',
@@ -26,14 +24,7 @@ class App extends React.Component {
     }})
   }
 
-  // updateSignInStatus = () => {
-  //   this.setState(prevState => ({
-  //     isSignedIn: !prevState.isSignedIn
-  //   }))
-  // }
-
   resetUser = () => {
-    console.log('this is reset user');
     this.setState({ user: {
       id: '',
       email: '',
@@ -49,8 +40,6 @@ class App extends React.Component {
           <Report />
         </Route>
         <Route path='/login'>
-          {/* add props to login route if i want to keep state in the App */}
-          {/* <Login loadUser={this.loadUser} updateSignInStatus={this.updateSignInStatus} onRouteChange={this.onRouteChange} /> */}
           <Login loadUser={this.loadUser} email={this.state.user.email} onRouteChange={this.onRouteChange} />
         </Route>
         <Route path='/register'>
@@ -58,7 +47,6 @@ class App extends React.Component {
         </Route>
         <Route exact path='/'>
           <Home
-            // isSignedIn={this.state.isSignedIn}
             email={this.state.user.email}
             resetUser={this.resetUser}
           />
